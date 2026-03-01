@@ -4,7 +4,7 @@
 #include <iostream>
 
 int main () {
-    Brawler leon("Leon", 3440, 11);
+    Brawler leon("Leon", 2700, 11);
     Brawler carl("Carl");
     Gadget leonGadget;
     GameMap cavernChurn("Cavern Churn", "Showdown", "Desert", "None");

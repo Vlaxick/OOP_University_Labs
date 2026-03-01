@@ -4,11 +4,11 @@
 Gadget::Gadget(std::string name_val, int charges_val) 
     : name{name_val}, charges{charges_val}
 {
-    std::cout << "Gadget " << name << "with " << charges << " charges." << std::endl;
+    std::cout << "Creating Gadget: " << name << " with " << charges << " charges." << std::endl;
 }
 
 Gadget::~Gadget() {
-    std::cout << "Gadget " << name << " has been used 3 times." << std::endl;
+    std::cout << "Gadget: " << name << " has been used 3 times." << std::endl;
 }
 
 void Gadget::use() {

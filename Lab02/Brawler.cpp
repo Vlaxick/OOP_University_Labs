@@ -4,11 +4,11 @@
 Brawler::Brawler(std::string name_val, int hp_val, int powerlvl_val) 
     : name{name_val}, hp{hp_val}, powerlvl{powerlvl_val} 
 {
-    std::cout << "Brawler " << name << "Hp " << hp << " Power Level " << powerlvl << std::endl;
+    std::cout << "Brawler: " << name << " Hp: " << hp << " Power Level: " << powerlvl << std::endl;
 }
 
 Brawler::Brawler(std::string name_val) 
-    : Brawler(name_val, 3770, 11) 
+    : Brawler(name_val, 3440, 11) 
 {
     std::cout << "Delegating constructor used for " << name << std::endl;
 }
