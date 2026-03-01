@@ -9,7 +9,7 @@ class Brawler {
     int powerlvl;
     
     public:
-    Brawler(std::string name_val = "Gloybert", int hp_val = 3770, int powerlvl_val = 11);
+    Brawler(std::string name_val, int hp_val, int powerlvl_val);
     Brawler(std::string name_val);
     ~Brawler();
 
