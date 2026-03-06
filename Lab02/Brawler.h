@@ -4,7 +4,6 @@
 #include "Gadget.h"
 
 class Brawler {
-    private:
     std::string name;
     int hp;
     int powerlvl;
