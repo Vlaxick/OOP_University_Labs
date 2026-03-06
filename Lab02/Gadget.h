@@ -3,7 +3,6 @@
 #include <string>
 
 class Gadget {
-    private:
     std::string name;
     int charges;
 
