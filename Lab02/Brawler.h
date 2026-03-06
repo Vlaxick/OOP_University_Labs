@@ -12,6 +12,8 @@ class Brawler {
     public:
     Brawler(std::string name_val, int hp_val, int powerlvl_val, Gadget gadget_val);
     Brawler(std::string name_val);
+    Brawler(const Brawler &other);
+    Brawler(Brawler &&other);
     ~Brawler();
 
     void attack();

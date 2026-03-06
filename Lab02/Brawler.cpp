@@ -13,6 +13,20 @@ Brawler::Brawler(std::string name_val)
     std::cout << "Delegating constructor used for " << name << std::endl;
 }
 
+Brawler::Brawler(const Brawler &other) 
+    : name{other.name}, hp{other.hp}, powerlvl{other.powerlvl}, gadget{other.gadget} 
+{
+    std::cout << "Copy constructor called for " << name << std::endl;
+}
+
+Brawler ::Brawler(Brawler &&other) 
+    : name{std::move(other.name)}, hp{other.hp}, powerlvl{other.powerlvl}, gadget{std::move(other.gadget)} 
+{
+    other.hp = 0;
+    other.powerlvl = 0;
+    std::cout << "Move constructor called for " << name << std::endl;
+}
+
 Brawler::~Brawler() {
     std::cout << "Brawler " << name << " has been destroyed by Leon" << std::endl;
 }
