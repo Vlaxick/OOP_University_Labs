@@ -4,6 +4,8 @@
 #include <iostream>
 
 int main () {
+    std::cout << "Brawler Count: " << Brawler::getBrawlerCount() << std::endl;
+
     Gadget invisibility("Invisibility Cloak", 3);
     Brawler leon("Leon", 2400, 11, invisibility);
     Gadget speeeeeed("Speed Booster", 3);
@@ -11,6 +13,8 @@ int main () {
     Gadget trainingGadget("Training Gadget", 5);
     const Brawler trainer ("Training Bot", 10000, 1, trainingGadget);
     GameMap cavernChurn("Cavern Churn", "Showdown", "Desert", "None");
+
+    std::cout << "Brawler Count: " << Brawler::getBrawlerCount() << std::endl;
 
     leon.showInfo();      
     carl.showInfo();      

@@ -8,6 +8,7 @@ class Brawler {
     int hp;
     int powerlvl;
     Gadget gadget;
+    static int brawlerCount;
     
     public:
     Brawler(std::string name_val, int hp_val, int powerlvl_val, Gadget gadget_val);
@@ -20,4 +21,5 @@ class Brawler {
     void showInfo() const;
     void useAbility();
     Brawler& upgrade();
+    static int getBrawlerCount();
 };
