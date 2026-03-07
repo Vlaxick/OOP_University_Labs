@@ -17,6 +17,7 @@ class Brawler {
     Brawler(Brawler &&other);
     ~Brawler();
 
+    friend std::ostream &operator<<(std::ostream &os, const Brawler &brawler);
     void attack();
     void showInfo() const;
     void useAbility();

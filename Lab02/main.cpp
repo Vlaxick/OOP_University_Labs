@@ -24,9 +24,9 @@ int main () {
     } else {
         std::cout << "Leon and Carl are different brawlers." << std::endl;
     }
-    
+
     ++leon;
-    leon.showInfo();      
+    std::cout << leon;      
     carl.showInfo();      
     trainer.showInfo();   
     leon.useAbility();    

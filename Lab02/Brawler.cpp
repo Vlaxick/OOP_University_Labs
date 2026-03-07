@@ -84,3 +84,8 @@ bool Brawler::operator==(const Brawler &rhs) const {
 Brawler& Brawler::operator++() {
     return this->upgrade();
 }
+
+std::ostream &operator<<(std::ostream &os, const Brawler &brawler) {
+    os << "Brawler: " << brawler.name << " Hp: " << brawler.hp << " Power Level: " << brawler.powerlvl;
+    return os;
+}
