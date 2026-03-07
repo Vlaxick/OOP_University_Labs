@@ -19,4 +19,5 @@ class Brawler {
     void attack();
     void showInfo();
     void useAbility();
+    Brawler& upgrade();
 };

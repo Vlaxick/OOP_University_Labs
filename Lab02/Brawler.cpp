@@ -43,3 +43,13 @@ void Brawler::useAbility() {
     std::cout << name << " uses his gadget: ";
     gadget.use(); 
 }
+
+Brawler& Brawler::upgrade() {
+    if (this->powerlvl >= 11) {
+        std::cout << name << " has max power level!" << std::endl;
+    } else {
+    this->powerlvl += 1;
+    std::cout << name << " has been upgraded to: " << powerlvl << std::endl;
+    }
+    return *this;
+}
