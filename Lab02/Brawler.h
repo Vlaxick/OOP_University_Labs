@@ -17,7 +17,7 @@ class Brawler {
     ~Brawler();
 
     void attack();
-    void showInfo();
+    void showInfo() const;
     void useAbility();
     Brawler& upgrade();
 };

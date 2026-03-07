@@ -31,7 +31,7 @@ Brawler::~Brawler() {
     std::cout << "Brawler " << name << " has been destroyed by Leon" << std::endl;
 }
 
-void Brawler::showInfo() {
+void Brawler::showInfo() const {
     std::cout << "--- Brawler Stats ---" << std::endl;
     std::cout << "Name: " << name << std::endl;
     std::cout << "Hp: " << hp << std::endl;

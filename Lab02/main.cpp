@@ -8,13 +8,16 @@ int main () {
     Brawler leon("Leon", 2400, 11, invisibility);
     Gadget speeeeeed("Speed Booster", 3);
     Brawler carl("Carl", 3440, 11, speeeeeed);
+    Gadget trainingGadget("Training Gadget", 5);
+    const Brawler trainer ("Training Bot", 10000, 1, trainingGadget);
     GameMap cavernChurn("Cavern Churn", "Showdown", "Desert", "None");
 
     leon.showInfo();      
     carl.showInfo();      
+    trainer.showInfo();   
     leon.useAbility();    
     cavernChurn.Rules();  
-    cavernChurn.checkEnd(1); 
+    cavernChurn.checkEnd(1);
 
     return 0;
 }
