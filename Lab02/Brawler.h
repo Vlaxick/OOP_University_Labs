@@ -22,4 +22,7 @@ class Brawler {
     void useAbility();
     Brawler& upgrade();
     static int getBrawlerCount();
+    Brawler& operator=(const Brawler &rhs);
+    bool operator==(const Brawler &rhs) const;
+    Brawler& operator++(); 
 };

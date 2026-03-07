@@ -63,3 +63,24 @@ Brawler& Brawler::upgrade() {
 int Brawler::getBrawlerCount() {
     return brawlerCount;
 }
+
+Brawler& Brawler::operator=(const Brawler &rhs) {
+    if (this == &rhs) {
+        return *this; 
+    }
+
+    this->name = rhs.name;
+    this->hp = rhs.hp;
+    this->powerlvl = rhs.powerlvl;
+    this->gadget = rhs.gadget;  
+    std::cout << "Copy assignment operator called for " << name << std::endl;
+    return *this;
+}
+
+bool Brawler::operator==(const Brawler &rhs) const {
+    return (this->name == rhs.name) && (this->hp == rhs.hp) && (this->powerlvl == rhs.powerlvl);
+}
+
+Brawler& Brawler::operator++() {
+    return this->upgrade();
+}

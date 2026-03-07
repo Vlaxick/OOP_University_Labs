@@ -16,6 +16,16 @@ int main () {
 
     std::cout << "Brawler Count: " << Brawler::getBrawlerCount() << std::endl;
 
+    Brawler copyOfLeon = leon;
+    copyOfLeon = carl;
+
+    if (leon == carl) {
+        std::cout << "Leon and Carl are the same brawler." << std::endl;
+    } else {
+        std::cout << "Leon and Carl are different brawlers." << std::endl;
+    }
+    
+    ++leon;
     leon.showInfo();      
     carl.showInfo();      
     trainer.showInfo();   
