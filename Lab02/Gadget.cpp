@@ -8,7 +8,7 @@ Gadget::Gadget(std::string name_val, int charges_val)
 }
 
 Gadget::~Gadget() {
-    std::cout << "Gadget: " << name << " has been used 3 times." << std::endl;
+    std::cout << "Gadget: " << name << " has been destructed" << std::endl;
 }
 
 void Gadget::use() {
