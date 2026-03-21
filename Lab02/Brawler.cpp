@@ -3,38 +3,36 @@
 
 int Brawler::brawlerCount = 0;
 
-Brawler::Brawler(std::string name_val, int hp_val, int powerlvl_val, Gadget gadget_val) 
-    : name{name_val}, hp{hp_val}, powerlvl{powerlvl_val}, gadget{gadget_val} 
+Brawler::Brawler(std::string name_val, int hp_val, int powerlvl_val, Gadget gadget_val, double x_val, double y_val, int id_val) 
+    : GameEntity(x_val, y_val, id_val), name{name_val}, hp{hp_val}, powerlvl{powerlvl_val}, gadget{gadget_val} 
 {
     brawlerCount++;
     std::cout << "Brawler: " << name << " Hp: " << hp << " Power Level: " << powerlvl << std::endl;
 }
 
 Brawler::Brawler(std::string name_val) 
-    : Brawler(name_val, 3440, 11, Gadget("Default Gadget")) 
+    : Brawler(name_val, 3440, 11, Gadget("Default Gadget"), 0.0, 0.0, 0) 
 {
     std::cout << "Delegating constructor used for " << name << std::endl;
 }
 
 Brawler::Brawler(const Brawler &other) 
-    : name{other.name}, hp{other.hp}, powerlvl{other.powerlvl}, gadget{other.gadget} 
+    : GameEntity(other), name{other.name}, hp{other.hp}, powerlvl{other.powerlvl}, gadget{other.gadget} 
 {
     brawlerCount++;
     std::cout << "Copy constructor called for " << name << std::endl;
 }
 
-Brawler::Brawler(Brawler &&other) 
-    : name{std::move(other.name)}, hp{other.hp}, powerlvl{other.powerlvl}, gadget{std::move(other.gadget)} 
+Brawler::Brawler(Brawler &&other) noexcept 
+    : GameEntity(std::move(other)), name{std::move(other.name)}, hp{std::move(other.hp)}, powerlvl{std::move(other.powerlvl)}, gadget{std::move(other.gadget)} 
 {
-    other.hp = 0;
-    other.powerlvl = 0;
     brawlerCount++;
     std::cout << "Move constructor called for " << name << std::endl;
 }
 
 Brawler::~Brawler() {
     brawlerCount--;
-    std::cout << "Brawler " << name << " has been destroyed by Leon" << std::endl;
+    std::cout << "Brawler " << name << " has been destroyed." << std::endl;
 }
 
 void Brawler::showInfo() const {
@@ -64,11 +62,12 @@ int Brawler::getBrawlerCount() {
     return brawlerCount;
 }
 
-Brawler& Brawler::operator=(const Brawler &rhs) {
+Brawler& Brawler::operator=(const Brawler &rhs) noexcept {
     if (this == &rhs) {
         return *this; 
     }
 
+    GameEntity::operator=(rhs);
     this->name = rhs.name;
     this->hp = rhs.hp;
     this->powerlvl = rhs.powerlvl;
