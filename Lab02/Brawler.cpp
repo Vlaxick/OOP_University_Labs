@@ -88,3 +88,19 @@ std::ostream &operator<<(std::ostream &os, const Brawler &brawler) {
     os << "Brawler: " << brawler.name << " Hp: " << brawler.hp << " Power Level: " << brawler.powerlvl;
     return os;
 }
+
+void Brawler::takeDamage(int damage) {
+    hp -= damage;
+
+    if (hp <= 0) {
+        hp = 0;
+        std::cout << name << " takes " << damage << " damage. Current HP: 0" << std::endl;
+        std::cout << "!!! Brawler " << name << " has been destroyed !!!" << std::endl;
+    } else {
+        std::cout << name << " takes " << damage << " damage. Current HP: " << hp << std::endl;
+    }
+}
+
+void Brawler ::attack() {
+    std::cout << name << " attacks with power level " << powerlvl << "!" << std::endl;
+}

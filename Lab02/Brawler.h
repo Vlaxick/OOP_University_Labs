@@ -18,12 +18,13 @@ class Brawler : public GameEntity {
     Brawler(std::string name_val);
     Brawler(const Brawler &other);
     Brawler(Brawler &&other) noexcept;
-    ~Brawler();
+    virtual ~Brawler();
 
     friend std::ostream &operator<<(std::ostream &os, const Brawler &brawler);
-    void attack();
+    virtual void attack();
     void showInfo() const;
-    void useAbility();
+    virtual void takeDamage(int damage);
+    virtual void useAbility();
     Brawler& upgrade();
     static int getBrawlerCount();
     Brawler& operator=(const Brawler &rhs) noexcept; 
