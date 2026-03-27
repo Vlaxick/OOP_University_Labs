@@ -52,3 +52,20 @@ void TankBrawler::takeDamage(int damage) {
     }
 }
 
+void TankBrawler::attack() {
+    std::cout << name << " performs a heavy smash attack!" << std::endl;
+}
+
+void TankBrawler::showInfo() const {
+    Brawler::showInfo();
+    std::cout << "Active Shield: " << activeShield.shieldType << " with durability: " << activeShield.durability << std::endl;
+}
+
+void TankBrawler::useAbility() {
+    std::cout << name << " activates his shield ability: ";
+    gadget.use(); 
+}
+
+double TankBrawler::getSpeed() const {
+    return 0.8; 
+}

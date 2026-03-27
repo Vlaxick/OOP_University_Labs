@@ -13,7 +13,11 @@ class TankBrawler : public Brawler {
     TankBrawler(const TankBrawler &other);
     TankBrawler(TankBrawler &&other) noexcept;
     TankBrawler &operator=(const TankBrawler &rhs) noexcept;
-    ~TankBrawler();
+    ~TankBrawler() override;
 
-    void takeDamage(int damage);
+    void takeDamage(int damage) override;
+    void attack() override;
+    void showInfo() const;
+    void useAbility() override;
+    double getSpeed() const override;
 };
