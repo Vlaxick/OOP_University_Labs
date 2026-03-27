@@ -23,6 +23,11 @@ int main () {
 
     std::cout << "Brawler Count after creation: " << Brawler::getBrawlerCount() << std::endl;
 
+    std::cout << "Static Binding Demonstration:" << std::endl;
+    Brawler* staticBrawlerPtr = &frank;
+    staticBrawlerPtr->showInfo();  
+    staticBrawlerPtr->takeDamage(50);  
+
     frank.move(2.0, 3.0);
     frank.showPosition();
     frank.takeDamage(50);
