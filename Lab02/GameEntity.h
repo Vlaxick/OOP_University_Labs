@@ -9,8 +9,11 @@ class GameEntity {
 
     public:
     GameEntity(double x_val, double y_val, int id_val);
-    ~GameEntity();
+    virtual ~GameEntity();
 
-    void showPosition() const;
-    void move(double dx, double dy);
+    virtual void showPosition() const;
+    virtual void move(double dx, double dy);
+    virtual void update();
+    virtual double getSpeed() const;
+    virtual void interact(GameEntity& other);
 };
