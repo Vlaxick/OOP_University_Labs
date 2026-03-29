@@ -3,7 +3,7 @@
 #include "Shield.h"
 #include <iostream>
 
-class TankBrawler : public Brawler {
+class TankBrawler final : public Brawler {
     protected:
     int armor;
     double damageReduction = 0.2; // Reduces damage by 20%
@@ -15,9 +15,10 @@ class TankBrawler : public Brawler {
     TankBrawler &operator=(const TankBrawler &rhs) noexcept;
     ~TankBrawler() override;
 
-    void takeDamage(int damage) override;
+    void takeDamage(int damage) override final;
     void attack() override;
     void showInfo() const;
     void useAbility() override;
     double getSpeed() const override;
+    void update() override;
 };

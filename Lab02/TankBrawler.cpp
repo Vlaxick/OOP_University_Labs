@@ -46,9 +46,7 @@ void TankBrawler::takeDamage(int damage) {
     }
 
     if (damage > 0) {
-        hp -= damage;
-        if (hp < 0) hp = 0;
-        std::cout << "Final damage to HP: " << damage << ". Current HP: " << hp << std::endl;
+        Brawler::takeDamage(damage);
     }
 }
 
@@ -68,4 +66,15 @@ void TankBrawler::useAbility() {
 
 double TankBrawler::getSpeed() const {
     return 0.8; 
+}
+
+void TankBrawler::update() {
+    Brawler::update();
+    if (activeShield.durability < 2000) {
+        activeShield.durability += 50;
+        if (activeShield.durability > 2000) {
+            activeShield.durability = 2000; 
+        }
+        std::cout << name << "'s shield regenerates. Current durability: " << activeShield.durability << std::endl;
+    }
 }
