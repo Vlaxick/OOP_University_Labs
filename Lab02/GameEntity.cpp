@@ -21,10 +21,6 @@ void GameEntity::move(double dx, double dy) {
     std::cout << "Object ID: " << id << " moved to position (" << x << ", " << y << ")" << std::endl;
 }
 
-void GameEntity::update() {
-   
-}
-
 double GameEntity::getSpeed() const {
     return 1.0; 
 }

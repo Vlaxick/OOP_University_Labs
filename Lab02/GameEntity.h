@@ -13,7 +13,7 @@ class GameEntity {
 
     virtual void showPosition() const;
     virtual void move(double dx, double dy);
-    virtual void update();
+    virtual void update() = 0;
     virtual double getSpeed() const;
     virtual void interact(GameEntity& other);
 };
