@@ -4,7 +4,7 @@
 int Brawler::brawlerCount = 0;
 
 Brawler::Brawler(std::string name_val, int hp_val, int powerlvl_val, Gadget gadget_val, double x_val, double y_val, int id_val) 
-    : GameEntity(x_val, y_val, id_val), name{name_val}, hp{hp_val}, powerlvl{powerlvl_val}, gadget{gadget_val} 
+    : GameEntity(x_val, y_val, id_val), name{name_val}, hp{hp_val}, powerlvl{powerlvl_val}, gadget{gadget_val}, MaxHp{hp_val}
 {
     brawlerCount++;
     std::cout << "Brawler: " << name << " Hp: " << hp << " Power Level: " << powerlvl << std::endl;
@@ -103,4 +103,16 @@ void Brawler::takeDamage(int damage) {
 
 void Brawler ::attack() {
     std::cout << name << " attacks with power level " << powerlvl << "!" << std::endl;
+}
+
+void Brawler::update() {
+    std::cout << name << " is updating its state." << std::endl;
+    if (hp < MaxHp) {
+        hp += 150; 
+        if (hp > MaxHp) {
+            hp = MaxHp; 
+        }
+        std::cout << name << " regenerates health. Current HP: " << hp << std::endl;
+        
+    }
 }
