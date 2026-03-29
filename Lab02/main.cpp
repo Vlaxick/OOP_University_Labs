@@ -3,7 +3,11 @@
 #include "Gadget.h"
 #include "TankBrawler.h"
 #include "Shield.h"
+#include "Box.h"
+#include "IDamageable.h"
 #include <iostream>
+
+void dealDamageToBrawler(Brawler &target, int amount);
 
 int main () {
     std::cout << "Initial Brawler Count: " << Brawler::getBrawlerCount() << std::endl;
@@ -21,19 +25,40 @@ int main () {
 
     GameMap cavernChurn("Cavern Churn", "Showdown", "Desert", "None");
 
+    IDamageable* box = new Box(15.0, 15.0, 5, 500);
+
     std::cout << "Brawler Count after creation: " << Brawler::getBrawlerCount() << std::endl;
 
     std::cout << "Static Binding Demonstration:" << std::endl;
     Brawler* staticBrawlerPtr = &frank;
     staticBrawlerPtr->showInfo();  
-    staticBrawlerPtr->takeDamage(50);  
+    staticBrawlerPtr->takeDamage(50);
+    
+    std::cout << "\nDynamic Binding Demonstration:" << std::endl;
+    Brawler* Team1[2] = {&leon, &frank};
+    for (int i = 0; i < 2; ++i) {
+        Team1[i]->showInfo();  
+        Team1[i]->takeDamage(50); 
+    }
 
+    Brawler* dynamicFrank = new TankBrawler("Dynamic Frank", 14000, 10, trainingGadget, 100, Shield("Iron", 2000), 10.0, 10.0, 4);
+    delete dynamicFrank;
+
+    dealDamageToBrawler(leon, 100);
+    dealDamageToBrawler(frank, 100);
+    
     frank.move(2.0, 3.0);
     frank.showPosition();
     frank.takeDamage(50);
 
     Brawler copyOfLeon = leon;
     copyOfLeon = carl;
+
+    IDamageable* targets[2] = {&leon, box};
+    for (int i = 0; i < 2; ++i) {
+        targets[i]->takeDamage(200);
+    }
+    delete box;
 
     if (leon == carl) {
         std::cout << "Leon and Carl are the same brawler." << std::endl;
@@ -50,4 +75,8 @@ int main () {
     cavernChurn.checkEnd(1);
 
     return 0;
+}
+
+void dealDamageToBrawler(Brawler &target, int amount) {
+    target.takeDamage(amount);
 }
