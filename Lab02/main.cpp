@@ -6,77 +6,52 @@
 #include "Box.h"
 #include "IDamageable.h"
 #include <iostream>
-
-void dealDamageToBrawler(Brawler &target, int amount);
+#include <vector>
+#include <memory>
+#include <string>
+#include "PlayerProfile.h"
+#include "LootBox.h"
+#include <ctime>
 
 int main () {
-    std::cout << "Initial Brawler Count: " << Brawler::getBrawlerCount() << std::endl;
+    std::srand(static_cast<unsigned int>(std::time(0)));
 
-    Gadget invisibility("Invisibility Cloak", 3);
-    Gadget speeeeeed("Speed Booster", 3);
-    Gadget trainingGadget("Training Gadget", 5);
+ std::cout << "Welcome to the Brawler Game!" << std::endl;
 
-    Brawler leon("Leon", 2400, 11, invisibility, 0.0, 0.0, 1);
-    Brawler carl("Carl", 3440, 11, speeeeeed, 5.0, 5.0, 2);
+ // Create a player profile
+ auto player = std::make_unique<PlayerProfile>("Vlaioxss");
 
-    TankBrawler frank("Frank", 14000, 10, trainingGadget, 100, Shield("Iron", 2000), 10.0, 10.0, 3);
+ //Create shop items (loot boxes, etc.)
+    std::vector<std::shared_ptr<LootBox>> shopItems;
+        shopItems.push_back(std::make_shared<LootBox>("Small Box", 80, 10, 50, 5, 20, 1, 5, 0.01f));
+        shopItems.push_back(std::make_shared<LootBox>("Big Box", 500, 50, 200, 20, 50, 5, 20, 0.1f));
+        shopItems.push_back(std::make_shared<LootBox>("Mega Box", 1000, 200, 500, 50, 100, 20, 50, 0.2f));
 
-    const Brawler trainer ("Training Bot", 10000, 1, trainingGadget, 50.0, 50.0, 999);
+ // Create some game maps
+ std::vector<std::shared_ptr<GameMap>> maps;
+    maps.push_back(std::make_shared<GameMap>("Sunny Beach", "Showdown", "Beach", "Sunny"));
+    maps.push_back(std::make_shared<GameMap>("Dark Forest", "Brawl Ball", "Forest", "Fog"));
+    maps.push_back(std::make_shared<GameMap>("Volcanic Crater", "Knockout", "Crater", "None"));
 
-    GameMap cavernChurn("Cavern Churn", "Showdown", "Desert", "None");
+// Create some gadgets for brawlers
+ auto MyUniqueGadget2 = std::make_unique<Gadget>("Mega Shield", 2);
+ auto MyUniqueGadget3 = std::make_unique<Gadget>("Healing Potion", 4);
+ auto MyUniqueGadget4 = std::make_unique<Gadget>("Speed Boost", 5);
+ auto MyUniqueGadget5 = std::make_unique<Gadget>("Invisibility Cloak", 1);
 
-    IDamageable* box = new Box(15.0, 15.0, 5, 500);
+ // Create some shields for tank brawlers
+ auto BullShield = std::make_unique<Shield>("Reinforced Plating", 3000);
 
-    std::cout << "Brawler Count after creation: " << Brawler::getBrawlerCount() << std::endl;
+//Create some entities (brawlers and tank brawlers, boxes, etc.)
+    std::vector<std::shared_ptr<GameEntity>> entities;
+    entities.push_back(std::make_shared<Brawler>("Nita", 5000, 10, std::move(MyUniqueGadget2), 12.0, 5.0, 2));
+    entities.push_back(std::make_shared<Brawler>("Colt", 4000, 9, std::move(MyUniqueGadget3), 10.0, 4.0, 3));
+    entities.push_back(std::make_shared<TankBrawler>("Bull", 8000, 9, std::move(MyUniqueGadget4), 10.0, 4.0, 4));
+    entities.push_back(std::make_shared<TankBrawler>("Jessy", 4500, 8, std::move(MyUniqueGadget5), 12.0, 6.0, 5, 10, std::move(BullShield)));
 
-    std::cout << "Static Binding Demonstration:" << std::endl;
-    Brawler* staticBrawlerPtr = &frank;
-    staticBrawlerPtr->showInfo();  
-    staticBrawlerPtr->takeDamage(50);
-    
-    std::cout << "\nDynamic Binding Demonstration:" << std::endl;
-    Brawler* Team1[2] = {&leon, &frank};
-    for (int i = 0; i < 2; ++i) {
-        Team1[i]->showInfo();  
-        Team1[i]->takeDamage(50); 
-    }
-
-    Brawler* dynamicFrank = new TankBrawler("Dynamic Frank", 14000, 10, trainingGadget, 100, Shield("Iron", 2000), 10.0, 10.0, 4);
-    delete dynamicFrank;
-
-    dealDamageToBrawler(leon, 100);
-    dealDamageToBrawler(frank, 100);
-    
-    frank.move(2.0, 3.0);
-    frank.showPosition();
-    frank.takeDamage(50);
-
-    Brawler copyOfLeon = leon;
-    copyOfLeon = carl;
-
-    IDamageable* targets[2] = {&leon, box};
-    for (int i = 0; i < 2; ++i) {
-        targets[i]->takeDamage(200);
-    }
-    delete box;
-
-    if (leon == carl) {
-        std::cout << "Leon and Carl are the same brawler." << std::endl;
-    } else {
-        std::cout << "Leon and Carl are different brawlers." << std::endl;
-    }
-
-    ++leon;
-    std::cout << leon;     
-    carl.showInfo();      
-    trainer.showInfo();   
-    leon.useAbility();    
-    cavernChurn.Rules();  
-    cavernChurn.checkEnd(1);
-
-    return 0;
+// Create some boxes for brawlers to interact with
+    entities.push_back(std::make_shared<Box>("Health Box", 2000, 10.0, 5.0, 6));
+    entities.push_back(std::make_shared<Box>("Ammo Box", 5000, 12.0, 6.0, 7));
+    entities.push_back(std::make_shared<Box>("Power-Up Box", 6000, 14.0, 7.0, 8));
 }
 
-void dealDamageToBrawler(Brawler &target, int amount) {
-    target.takeDamage(amount);
-}
