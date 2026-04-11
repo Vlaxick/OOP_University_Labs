@@ -12,6 +12,10 @@
 #include "PlayerProfile.h"
 #include "LootBox.h"
 #include <ctime>
+#include <fstream>
+
+void saveMapsToFile(const std::vector<std::shared_ptr<GameMap>>& maps);
+void loadMapsFromFile(std::vector<std::shared_ptr<GameMap>>& maps); 
 
 int main () {
     std::srand(static_cast<unsigned int>(std::time(0)));
@@ -20,6 +24,7 @@ int main () {
 
  // Create a player profile
  auto player = std::make_unique<PlayerProfile>("Vlaioxss");
+ player->loadProgress();
 
  //Create shop items (loot boxes, etc.)
     std::vector<std::shared_ptr<LootBox>> shopItems;
@@ -29,9 +34,16 @@ int main () {
 
  // Create some game maps
  std::vector<std::shared_ptr<GameMap>> maps;
+ loadMapsFromFile(maps);
+
+ if (maps.empty()) {
     maps.push_back(std::make_shared<GameMap>("Sunny Beach", "Showdown", "Beach", "Sunny"));
     maps.push_back(std::make_shared<GameMap>("Dark Forest", "Brawl Ball", "Forest", "Fog"));
     maps.push_back(std::make_shared<GameMap>("Volcanic Crater", "Knockout", "Crater", "None"));
+
+    saveMapsToFile(maps);
+}
+    
 
 // Create some gadgets for brawlers
  auto MyUniqueGadget2 = std::make_unique<Gadget>("Mega Shield", 2);
@@ -137,6 +149,9 @@ if (choice == 777) {
 
                      maps.push_back(std::make_shared<GameMap>(name, mode, environment, modifier));
                      std::cout << "Map " << name << " added successfully!" << std::endl;
+                     system("cls");
+
+                     saveMapsToFile(maps);
                     break;
                 }
                 case 3: {
@@ -249,6 +264,8 @@ if (choice == 777) {
                 std::cout << "\n TRANSACTION FAILED: " << e.what() << std::endl;
             }
 
+            player->saveProgress();
+
             std::cout << "\nPress Enter to continue...";
             std::cin.ignore(10000, '\n');
             std::cin.get();
@@ -291,6 +308,7 @@ if (choice == 777) {
             }
 
             fighter->resetHp();
+            player->saveProgress();
             std::cout << "\n--- BATTLE END ---" << std::endl;
 
             std::cout << "------------------------------------------" << std::endl;
@@ -376,4 +394,33 @@ if (choice == 777) {
 
 }
 return 0;
+}
+
+//Function realization
+void saveMapsToFile(const std::vector<std::shared_ptr<GameMap>>& maps) {
+    std::ofstream file("maps.txt");
+    
+    if (file.is_open()){
+        for (const auto& map : maps) {
+            file << map->getName() << "," << map->getMode() << "," << map->getEnvironment() << "," << map->getModifier() << std::endl;
+        }
+        file.close();
+        std::cout << "Maps saved to maps.txt successfully!" << std::endl;
+    } else {
+        std::cout << "Error opening file for writing!" << std::endl;
+    }
+}
+
+void loadMapsFromFile(std::vector<std::shared_ptr<GameMap>>& maps) {
+    std::ifstream file("maps.txt");
+    if (file.is_open()) {
+        std::string name, mode, environment, modifier;
+        while (std::getline(file, name, ',') && std::getline(file, mode, ',') && std::getline(file, environment, ',') && std::getline(file, modifier)) {
+            maps.push_back(std::make_shared<GameMap>(name, mode, environment, modifier));
+        }
+        file.close();
+        std::cout << "Maps loaded from maps.txt successfully!" << std::endl;
+    } else {
+        std::cout << "Error opening file for reading!" << std::endl;
+    }
 }
