@@ -1,7 +1,7 @@
 #include "LootBox.h"
 
-LootBox::LootBox(const std::string& type, int price, int minCoins, int maxCoins, int minPowerPoints, int maxPowerPoints, int minGems, int maxGems, float brawlerDropRate)
-: boxType(type), price(price), minCoins(minCoins), maxCoins(maxCoins), minPowerPoints(minPowerPoints), maxPowerPoints(maxPowerPoints), minGems(minGems), maxGems(maxGems), BrawlerDropRate(brawlerDropRate) {
+LootBox::LootBox(const std::string& type, int price, int priceType, int minCoins, int maxCoins, int minPowerPoints, int maxPowerPoints, int minGems, int maxGems, float brawlerDropRate)
+: boxType(type), price(price), priceType(priceType), minCoins(minCoins), maxCoins(maxCoins), minPowerPoints(minPowerPoints), maxPowerPoints(maxPowerPoints), minGems(minGems), maxGems(maxGems), BrawlerDropRate(brawlerDropRate) {
 }
 
 void LootBox::openBox(PlayerProfile& player) {
