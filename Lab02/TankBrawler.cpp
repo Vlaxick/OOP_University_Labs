@@ -3,10 +3,10 @@
 #include "Shield.h"
 #include "Brawler.h"
 
-TankBrawler::TankBrawler(std::string name_val, int hp_val, int powerlvl_val, Gadget gadget_val, int armor_val, Shield shield_val, double x_val, double y_val, int id_val) 
-    : Brawler(name_val, hp_val, powerlvl_val, gadget_val, x_val, y_val, id_val), armor{armor_val}, activeShield{shield_val} 
+TankBrawler::TankBrawler(std::string name_val, int hp_val, int powerlvl_val, int attackDamage_val, Gadget gadget_val, int armor_val, Shield shield_val, double x_val, double y_val, int id_val) 
+    : Brawler(name_val, hp_val, powerlvl_val, attackDamage_val, gadget_val, x_val, y_val, id_val), armor{armor_val}, activeShield{shield_val} 
 {
-    std::cout << "TankBrawler: " << name << " with Armor: " << armor << " has been created." << std::endl;
+    std::cout << "TankBrawler: " << name << " Hp: " << hp << " Power Level: " << powerlvl << " Armor: " << armor << std::endl;
 }
 
 TankBrawler::TankBrawler(const TankBrawler &other) 
