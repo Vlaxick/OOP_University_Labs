@@ -3,15 +3,15 @@
 
 int Brawler::brawlerCount = 0;
 
-Brawler::Brawler(std::string name_val, int hp_val, int powerlvl_val, Gadget gadget_val, double x_val, double y_val, int id_val) 
-    : GameEntity(x_val, y_val, id_val), name{name_val}, hp{hp_val}, powerlvl{powerlvl_val}, gadget{gadget_val}, MaxHp{hp_val}
+Brawler::Brawler(std::string name_val, int hp_val, int powerlvl_val, int attackDamage_val, Gadget gadget_val, double x_val, double y_val, int id_val) 
+    : GameEntity(x_val, y_val, id_val), name{name_val}, hp{hp_val}, powerlvl{powerlvl_val}, gadget{gadget_val}, MaxHp{hp_val}, attackDamage{attackDamage_val}   
 {
     brawlerCount++;
     std::cout << "Brawler: " << name << " Hp: " << hp << " Power Level: " << powerlvl << std::endl;
 }
 
 Brawler::Brawler(std::string name_val) 
-    : Brawler(name_val, 3440, 11, Gadget("Default Gadget"), 0.0, 0.0, 0) 
+    : Brawler(name_val, 3440, 11, 360, Gadget("Default Gadget"), 0.0, 0.0, 0) 
 {
     std::cout << "Delegating constructor used for " << name << std::endl;
 }
@@ -115,4 +115,16 @@ void Brawler::update() {
         std::cout << name << " regenerates health. Current HP: " << hp << std::endl;
         
     }
+}
+
+std::string Brawler::getName() const {
+    return name;
+}
+
+int Brawler::getHP() const {
+    return hp;
+}
+
+int Brawler::getAttackDamage() const {
+    return attackDamage;
 }

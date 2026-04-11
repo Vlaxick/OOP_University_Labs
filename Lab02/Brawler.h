@@ -14,9 +14,9 @@ class Brawler : public GameEntity, public IDamageable {
     int powerlvl;
     Gadget gadget;
     int MaxHp;
-    
+    int attackDamage;
     public:
-    Brawler(std::string name_val, int hp_val, int powerlvl_val, Gadget gadget_val, double x_val = 0.0, double y_val = 0.0, int id_val = 0);
+    Brawler(std::string name_val, int hp_val, int powerlvl_val, int attackDamage_val, Gadget gadget_val, double x_val = 0.0, double y_val = 0.0, int id_val = 0);
     Brawler(std::string name_val);
     Brawler(const Brawler &other);
     Brawler(Brawler &&other) noexcept;
@@ -33,4 +33,10 @@ class Brawler : public GameEntity, public IDamageable {
     Brawler& operator=(const Brawler &rhs) noexcept; 
     bool operator==(const Brawler &rhs) const;
     Brawler& operator++(); 
+    std::string getName() const;
+    int getHP() const;
+    int getAttackDamage() const;
+    void resetHp() {
+        hp = MaxHp;
+    }
 };
