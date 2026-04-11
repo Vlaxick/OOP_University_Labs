@@ -4,7 +4,7 @@
 PlayerProfile::PlayerProfile(const std::string& name) 
 : playerName(name), playerLevel(1), playerExperience(0), playerTrophies(0), playerCoins(0), playerPowerPoints(0), playerGems(0) 
 {
-addBrawler(std::make_shared<Brawler>("Shelly", 6000, 11, std::make_unique<Gadget>("Super Blaster", 3), 15.0, 6.0, 1));
+addBrawler(std::make_shared<Brawler>("Shelly", 6000, 11, 300, Gadget("Super Blaster", 3), 15.0, 6.0, 1));
 
 selectBrawler(0);
 }
@@ -47,14 +47,12 @@ void PlayerProfile::addGems(int gems) {
 }
 
 void PlayerProfile::showProfile() const {
-    std::cout << "Player Name: " << playerName << std::endl;
-    std::cout << "Level: " << playerLevel << std::endl;
-    std::cout << "Experience: " << playerExperience << std::endl;
-    std::cout << "Trophies: " << playerTrophies << std::endl;
-    std::cout << "Coins: " << playerCoins << std::endl;
-    std::cout << "Power Points: " << playerPowerPoints << std::endl;
-    std::cout << "Gems: " << playerGems << std::endl;
-    std::cout << "Brawlers Owned: " << playerBrawlers.size() << std::endl;
+    std::cout << "Nickname:   " << playerName << std::endl;
+    std::cout << "Level:      " << playerLevel << " (" << playerExperience << " XP)" << std::endl;
+    std::cout << "Trophies:   " << playerTrophies << std::endl;
+    std::cout << "Coins:      " << playerCoins << std::endl;
+    std::cout << "Gems:       " << playerGems << std::endl;
+    std::cout << "Brawlers:   " << playerBrawlers.size() << " unlocked" << std::endl;
 }
 
 void PlayerProfile::showBattleLog() const {
@@ -83,4 +81,51 @@ void PlayerProfile::spendPowerPoints(int points) {
         throw std::runtime_error("Not enough power points!");
     }
     playerPowerPoints -= points;
+}
+
+void PlayerProfile::addPowerPoints(int points) {
+    playerPowerPoints += points;
+}
+
+int PlayerProfile::getLevel() const {
+    return playerLevel;
+}
+
+int PlayerProfile::getExperience() const {
+    return playerExperience;
+}
+
+int PlayerProfile::getTrophies() const {
+    return playerTrophies;
+}
+
+int PlayerProfile::getCoins() const {
+    return playerCoins;
+}
+
+int PlayerProfile::getGems() const {
+    return playerGems;
+}
+
+int PlayerProfile::getPowerPoints() const {
+    return playerPowerPoints;
+}
+
+std::string PlayerProfile::getName() const {
+    return playerName;
+}
+
+std::shared_ptr<Brawler> PlayerProfile::getActiveBrawler() const {
+    return selectedBrawler;
+}
+
+int PlayerProfile::getBrawlerCount() const {
+    return playerBrawlers.size();
+}
+
+std::string PlayerProfile::getBrawlerName(int index) const {
+    if (index < 0 || index >= playerBrawlers.size()) {
+        throw std::out_of_range("Invalid brawler index!");
+    }
+    return playerBrawlers[index]->getName();
 }

@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <string>
 #include <vector>
@@ -26,9 +27,20 @@ public:
     void loseBattle(int trophiesLost);
     void addCoins(int coins);
     void addGems(int gems);
+    void addPowerPoints(int points);
     void showProfile() const;
     void showBattleLog() const;
     void spendCoins(int coins);
     void spendGems(int gems);
     void spendPowerPoints(int points);
+    int getLevel() const;
+    int getExperience() const;
+    int getTrophies() const;
+    int getCoins() const;
+    int getGems() const;
+    int getPowerPoints() const;
+    std::string getName() const;
+    std::shared_ptr<Brawler> getActiveBrawler() const;
+    int getBrawlerCount() const;
+    std::string getBrawlerName(int index) const;
 };
