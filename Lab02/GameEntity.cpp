@@ -28,3 +28,7 @@ double GameEntity::getSpeed() const {
 void GameEntity::interact(GameEntity& other) {
     std::cout << "Object ID: " << id << " interacts with Object ID: " << other.id << std::endl;
 }
+
+void GameEntity::showInfo() const {
+    std::cout << "Object ID: " << id << " at position (" << x << ", " << y << ")" << std::endl;
+}

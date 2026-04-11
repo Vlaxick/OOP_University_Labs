@@ -16,4 +16,5 @@ class GameEntity {
     virtual void update() = 0;
     virtual double getSpeed() const;
     virtual void interact(GameEntity& other);
+    virtual void showInfo() const;
 };
