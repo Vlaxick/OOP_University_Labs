@@ -19,4 +19,10 @@ class GameMap {
     std::string getMode() const {
         return gamemode;
     }
+    std::string getEnvironment() const {
+        return environment;
+    }
+    std::string getModifier() const {
+        return modifier;
+    }
 };
