@@ -43,4 +43,6 @@ public:
     std::shared_ptr<Brawler> getActiveBrawler() const;
     int getBrawlerCount() const;
     std::string getBrawlerName(int index) const;
+    void saveProgress() const;
+    void loadProgress();
 };

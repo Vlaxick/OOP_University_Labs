@@ -1,5 +1,6 @@
 #include "PlayerProfile.h"
 #include <iostream>
+#include <fstream>
 
 PlayerProfile::PlayerProfile(const std::string& name) 
 : playerName(name), playerLevel(1), playerExperience(0), playerTrophies(0), playerCoins(0), playerPowerPoints(0), playerGems(0) 
@@ -128,4 +129,36 @@ std::string PlayerProfile::getBrawlerName(int index) const {
         throw std::out_of_range("Invalid brawler index!");
     }
     return playerBrawlers[index]->getName();
+}
+
+void PlayerProfile::saveProgress() const {
+    std::ofstream file("player_save.txt");
+    if (file.is_open()) {
+        file << playerName << "\n";
+        file << playerLevel << "\n";
+        file << playerExperience << "\n";
+        file << playerTrophies << "\n";
+        file << playerCoins << "\n";
+        file << playerGems << "\n";
+        file << playerPowerPoints << "\n";
+        file.close();
+        //std::cout << "[SYSTEM] Profile saved!" << std::endl;
+    };
+}
+
+void PlayerProfile::loadProgress() {
+    std::ifstream file("player_save.txt");
+    if (file.is_open()) {
+        std::getline(file, playerName);
+        file >> playerLevel;
+        file >> playerExperience;
+        file >> playerTrophies;
+        file >> playerCoins;
+        file >> playerGems;
+        file >> playerPowerPoints;
+        file.close();
+        std::cout << "[+] Player profile loaded successfully!" << std::endl;
+    } else {
+        std::cout << "[!] No save file found. Creating a new profile." << std::endl;
+    }
 }
