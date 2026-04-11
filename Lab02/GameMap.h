@@ -13,4 +13,10 @@ class GameMap {
     ~GameMap();
     void Rules();
     void checkEnd(int gamerule);
+    std::string getName() const {
+        return name;
+    }
+    std::string getMode() const {
+        return gamemode;
+    }
 };
